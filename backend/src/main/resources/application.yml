@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: securescape-backend
+
+  datasource:
+    url: jdbc:postgresql://ep-long-lab-ahr27ih6-pooler.c-3.us-east-1.aws.neon.tech:5432/neondb?sslmode=require
+    username: neondb_owner
+    password: "npg_ux6qoAWt2rsH"
+    driver-class-name: org.postgresql.Driver
+
+  hikari:
+      maximum-pool-size: 5
+      minimum-idle: 0
+      idle-timeout: 10000        # 10 seconds
+      max-lifetime: 30000        # 🔥 30 seconds (CRITICAL)
+      keepalive-time: 15000      # 🔥 keep connection fresh
+      connection-timeout: 30000
+      validation-timeout: 5000
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc:
+          time_zone: UTC
+
+server:
+  port: 5000
+
+logging:
+  level:
+    root: INFO
+    org.hibernate.SQL: DEBUG

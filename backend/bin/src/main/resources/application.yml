@@ -1,0 +1,62 @@
+spring:
+  application:
+    name: securescape-backend
+  
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://ep-xxx-xxx.us-east-2.aws.neon.tech/securescape?sslmode=require}
+    username: ${DATABASE_USERNAME:your-username}
+    password: ${DATABASE_PASSWORD:your-password}
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      leak-detection-threshold: 60000
+  
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          time_zone: UTC
+          batch_size: 20
+        connection:
+          provider_disables_autocommit: false
+        order_inserts: true
+        order_updates: true
+        generate_statistics: false
+  
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+    timeout: 30m
+  
+  web:
+    cors:
+      allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000}
+      allowed-methods: GET,POST,PUT,DELETE,OPTIONS,PATCH
+      allowed-headers: "*"
+      allow-credentials: true
+      max-age: 3600
+
+server:
+  port: ${SERVER_PORT:5000}
+  servlet:
+    context-path: /
+
+logging:
+  level:
+    root: INFO
+    com.securescape: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
