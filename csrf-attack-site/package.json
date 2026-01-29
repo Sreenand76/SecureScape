@@ -1,0 +1,17 @@
+{
+  "name": "csrf-attack-site",
+  "version": "1.0.0",
+  "description": "External CSRF attack site for educational demonstration",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "csrf",
+    "security",
+    "education",
+    "demo"
+  ],
+  "author": "",
+  "license": "MIT"
+}

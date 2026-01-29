@@ -128,6 +128,12 @@ export const xssAPI = {
   
   addComment: (comment, mode) => 
     api.post(getEndpoint('/xss/comment', mode), { text: comment }),
+  
+  search: (query, mode) =>
+    api.get(getEndpoint('/xss/search', mode), { params: { q: query } }),
+  
+  getSessionInfo: (mode) =>
+    api.get(getEndpoint('/xss/session-info', mode)),
 };
 
 // CSRF endpoints
@@ -137,6 +143,15 @@ export const csrfAPI = {
   
   transfer: (data, mode) => 
     api.post(getEndpoint('/csrf/transfer', mode), data),
+  
+  transferGet: (to, amount, mode) =>
+    api.get(getEndpoint('/csrf/transfer', mode), { params: { to, amount } }),
+  
+  getSessionInfo: (mode) =>
+    api.get(getEndpoint('/csrf/session-info', mode)),
+  
+  getProfile: (mode) =>
+    api.get(getEndpoint('/csrf/profile', mode)),
 };
 
 export default api;

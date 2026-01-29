@@ -4,6 +4,10 @@ import com.securescape.dto.CommentRequest;
 import com.securescape.dto.CommentResponse;
 import com.securescape.model.Comment;
 import com.securescape.repository.CommentRepository;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +19,13 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/attack/xss")
-@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
+@CrossOrigin(origins = "*", allowCredentials = "true") // Allow all origins for attack simulation
 public class AttackXssController {
     
     @Autowired
     private CommentRepository commentRepository;
     
-    // VULNERABLE: Stores raw HTML without sanitization
+    // VULNERABLE: Stores raw HTML without sanitization (Stored XSS)
     @PostMapping("/comment")
     public ResponseEntity<?> addComment(@RequestBody CommentRequest request) {
         try {
@@ -48,7 +52,7 @@ public class AttackXssController {
         }
     }
     
-    // VULNERABLE: Returns raw HTML without encoding
+    // VULNERABLE: Returns raw HTML without encoding (Stored XSS)
     @GetMapping("/comments")
     public ResponseEntity<?> getComments() {
         try {
@@ -66,6 +70,55 @@ public class AttackXssController {
         } catch (Exception e) {
             Map<String, String> error = new HashMap<>();
             error.put("error", "Failed to retrieve comments: " + e.getMessage());
+            return ResponseEntity.ok(error);
+        }
+    }
+    
+    // VULNERABLE: Reflected XSS - User input directly reflected in response
+    @GetMapping("/search")
+    public ResponseEntity<?> search(@RequestParam String q, HttpServletRequest request) {
+        try {
+            Map<String, Object> response = new HashMap<>();
+            // VULNERABLE: Direct reflection without encoding
+            response.put("query", q);
+            response.put("results", "Search results for: " + q);
+            response.put("warning", "VULNERABLE: Reflected XSS - user input directly reflected");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Search failed: " + e.getMessage());
+            return ResponseEntity.ok(error);
+        }
+    }
+    
+    // VULNERABLE: Returns session information (for cookie stealing demo)
+    @GetMapping("/session-info")
+    public ResponseEntity<?> getSessionInfo(HttpSession session, HttpServletRequest request) {
+        try {
+            Map<String, Object> response = new HashMap<>();
+            response.put("sessionId", session.getId());
+            response.put("sessionCreationTime", session.getCreationTime());
+            response.put("lastAccessedTime", session.getLastAccessedTime());
+            
+            // Get cookies
+            Cookie[] cookies = request.getCookies();
+            Map<String, String> cookieMap = new HashMap<>();
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    cookieMap.put(cookie.getName(), cookie.getValue());
+                }
+            }
+            response.put("cookies", cookieMap);
+            
+            // Get user agent and other headers
+            response.put("userAgent", request.getHeader("User-Agent"));
+            response.put("remoteAddr", request.getRemoteAddr());
+            
+            response.put("warning", "VULNERABLE: Session information exposed");
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            Map<String, String> error = new HashMap<>();
+            error.put("error", "Failed to get session info: " + e.getMessage());
             return ResponseEntity.ok(error);
         }
     }
