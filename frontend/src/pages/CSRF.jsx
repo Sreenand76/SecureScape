@@ -64,6 +64,13 @@ const CSRF = () => {
     }
   };
 
+  const openPhishingSite = () => {
+    window.open(
+      'http://127.0.0.1:5500/csrf-attack-site/csrf-attack.html',
+      '_blank'
+    );
+  };
+
   /* ---------- REAL CSRF ATTACK (SIMULATED) ---------- */
   const triggerCsrfAttack = async () => {
     setResult(null);
@@ -114,21 +121,20 @@ const CSRF = () => {
       <DemoCard title="Victim State (Live)">
         <p><b>Session ID:</b> {sessionId}</p>
         <p className="text-xl mt-2">
-         Balance: <b>₹{balance}</b>
+          Balance: <b>₹{balance}</b>
         </p>
       </DemoCard>
 
       {/* ---------- TABS ---------- */}
       <div className="flex gap-6 border-b">
-        {['form', 'attack', 'explain'].map(tab => (
+        {['form', 'explain'].map(tab => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`pb-2 ${
-              activeTab === tab
-                ? 'border-b-2 border-blue-600 text-blue-600'
-                : 'text-gray-500'
-            }`}
+            className={`pb-2 ${activeTab === tab
+              ? 'border-b-2 border-blue-600 text-blue-600'
+              : 'text-gray-500'
+              }`}
           >
             {tab.toUpperCase()}
           </button>
@@ -206,6 +212,41 @@ const CSRF = () => {
           </ol>
         </InfoPanel>
       )}
+
+      {/* ---------- FLOATING PHISHING BUTTON ---------- */}
+
+      <div
+        onClick={openPhishingSite}
+        className="fixed bottom-6 right-6 z-50"
+      >
+        <div
+          className="relative 
+               bg-gradient-to-r from-pink-500 via-red-500 to-yellow-400
+               text-white font-bold text-sm
+               px-6 py-3
+               rounded-full shadow-2xl
+               cursor-pointer
+               transition-all duration-300
+               hover:scale-110 hover:-translate-y-1
+               animate-pulse"
+          style={{
+            boxShadow: '0 0 20px rgba(255, 0, 100, 0.6)',
+          }}
+        >
+          🎁 CLAIM FREE REWARD
+
+          {/* Glowing badge */}
+          <span
+            className="absolute -top-2 -right-2 
+                 bg-green-500 text-[11px] 
+                 px-2 py-1 rounded-full 
+                 shadow-md"
+          >
+            NEW
+          </span>
+        </div>
+      </div>
+
     </div>
   );
 };
