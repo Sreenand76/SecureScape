@@ -40,19 +40,17 @@ public class AttackSqlController {
                         "' AND password = '" + 
                         request.getPassword() + "'";
             
-            Query query = entityManager.createNativeQuery(sql, User.class);
+            // ❗ Intentionally use a raw native query instead of safe parameter binding.
+            // Also avoid mapping to the User entity to keep the demo simple and prevent
+            // column-mapping issues if the schema changes (e.g. extra fields like balance).
+            Query query = entityManager.createNativeQuery(sql);
             @SuppressWarnings("unchecked")
-            List<User> users = query.getResultList();
+            List<Object[]> users = query.getResultList();
             
             if (!users.isEmpty()) {
-                User user = users.get(0);
-                LoginResponse.UserInfo userInfo = new LoginResponse.UserInfo(
-                    user.getId(),
-                    user.getUsername(),
-                    user.getEmail(),
-                    user.getRole()
-                );
-                return ResponseEntity.ok(new LoginResponse(true, "Login successful", userInfo));
+                // We only care that *some* row matched the vulnerable query.
+                // For the purposes of the demo, we don't need to expose full user data here.
+                return ResponseEntity.ok(new LoginResponse(true, "Login successful (vulnerable query matched a row)", null));
             } else {
                 return ResponseEntity.ok(new LoginResponse(false, "Invalid credentials", null));
             }

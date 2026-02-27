@@ -21,7 +21,27 @@ public class User {
     
     private String role = "USER";
     
+    @Column(nullable = false)
+    private Double balance = 10000.0;
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
     public User() {
+    }
+    
+    public User(Long id, String username, String password, String email, String role, Double balance) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.balance = balance;
     }
     
     public User(Long id, String username, String password, String email, String role) {
