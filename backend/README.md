@@ -74,6 +74,20 @@ The API will be available at `http://localhost:5000`
 - `GET /api/secure/csrf/form` - Get form with CSRF token
 - `POST /api/secure/csrf/transfer` - Transfer with CSRF token validation
 
+### Broken Authentication
+
+**Attack Mode (Intentionally Broken):**
+- `POST /api/attack/auth/login` - Login with username enumeration (detailed errors)
+- `GET /api/attack/auth/whoami` - Session introspection (overly verbose)
+- `POST /api/attack/auth/logout` - Logout without session invalidation
+- `POST /api/attack/auth/change-password` - Change password without verifying old password
+
+**Secure Mode (Mitigations):**
+- `POST /api/secure/auth/login` - Generic errors, basic lockout, session rotation
+- `GET /api/secure/auth/whoami` - Minimal user info
+- `POST /api/secure/auth/logout` - Invalidates session
+- `POST /api/secure/auth/change-password` - Requires old password + basic policy
+
 ## Database
 
 The application uses **Neon PostgreSQL** (cloud PostgreSQL). 

@@ -65,10 +65,27 @@ const CSRF = () => {
   };
 
   const openPhishingSite = () => {
-    window.open(
-      'http://127.0.0.1:5500/csrf-attack-site/csrf-attack.html',
-      '_blank'
-    );
+    // Use Live Server URL (as requested).
+    // Send mode via both query param (fallback) and postMessage (reliable, works even if page is already open).
+    const url = `http://127.0.0.1:5500/csrf-attack-site/csrf-attack.html?mode=${encodeURIComponent(
+      mode
+    )}`;
+    const w = window.open(url, '_blank');
+    try {
+      // Try a few times in case the new tab is still loading.
+      const targetOrigin = new URL(url).origin;
+      let attempts = 0;
+      const timer = setInterval(() => {
+        attempts += 1;
+        if (!w || w.closed || attempts > 20) {
+          clearInterval(timer);
+          return;
+        }
+        w.postMessage({ type: 'SECURESCAPE_MODE', mode }, targetOrigin);
+      }, 250);
+    } catch {
+      // Ignore (popup blockers / cross-window timing)
+    }
   };
 
   /* ---------- REAL CSRF ATTACK (SIMULATED) ---------- */
@@ -127,7 +144,7 @@ const CSRF = () => {
 
       {/* ---------- TABS ---------- */}
       <div className="flex gap-6 border-b">
-        {['form', 'explain'].map(tab => (
+        {['form', 'attack', 'explain'].map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}

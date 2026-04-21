@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import SQLInjection from './pages/SQLInjection';
 import XSS from './pages/XSS';
 import CSRF from './pages/CSRF';
+import BrokenAuth from './pages/BrokenAuth';
 
 // Component to initialize request logger
 const RequestLoggerInitializer = () => {
@@ -58,6 +59,14 @@ function App() {
             element={
               <Layout>
                 <CSRF />
+              </Layout>
+            } 
+          />
+          <Route 
+            path="/broken-auth" 
+            element={
+              <Layout>
+                <BrokenAuth />
               </Layout>
             } 
           />

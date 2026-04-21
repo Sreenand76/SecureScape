@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { FiDatabase, FiCode, FiLink, FiMenu, FiX } from 'react-icons/fi';
+import { FiDatabase, FiCode, FiLink, FiMenu, FiX, FiUser } from 'react-icons/fi';
 import { useSecurityMode } from '../../contexts/SecurityModeContext';
 
 const Sidebar = () => {
@@ -23,6 +23,11 @@ const Sidebar = () => {
       path: '/csrf',
       label: 'CSRF',
       icon: FiLink,
+    },
+    {
+      path: '/broken-auth',
+      label: 'Broken Auth',
+      icon: FiUser,
     },
   ];
   

@@ -24,13 +24,10 @@ public class DataInitializer implements CommandLineRunner {
     
     @Override
     public void run(String... args) throws Exception {
-        // Initialize users
-        if (userRepository.count() == 0) {
-            userRepository.save(new User(null, "admin", "admin123", "admin@securescape.com", "ADMIN"));
-            userRepository.save(new User(null, "user1", "password123", "user1@securescape.com", "USER"));
-            userRepository.save(new User(null, "john", "john123", "john@example.com", "USER"));
-            System.out.println("Initialized users");
-        }
+        // Initialize demo users (ensure they exist even if DB is not empty)
+        ensureUser("admin", "admin123", "admin@securescape.com", "ADMIN");
+        ensureUser("user1", "password123", "user1@securescape.com", "USER");
+        ensureUser("john", "john123", "john@example.com", "USER");
         
         // Initialize products
         if (productRepository.count() == 0) {
@@ -47,6 +44,13 @@ public class DataInitializer implements CommandLineRunner {
             commentRepository.save(new Comment(null, "This is a great product!", null));
             commentRepository.save(new Comment(null, "I love using this platform for learning!", null));
             System.out.println("Initialized comments");
+        }
+    }
+
+    private void ensureUser(String username, String password, String email, String role) {
+        if (userRepository.findByUsername(username).isEmpty()) {
+            userRepository.save(new User(null, username, password, email, role));
+            System.out.println("Created demo user: " + username);
         }
     }
 }

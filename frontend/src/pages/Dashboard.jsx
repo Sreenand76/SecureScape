@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiDatabase, FiCode, FiLink, FiArrowRight, FiShield } from 'react-icons/fi';
+import { FiDatabase, FiCode, FiLink, FiArrowRight, FiShield, FiUser } from 'react-icons/fi';
 import { useSecurityMode } from '../contexts/SecurityModeContext';
 import DemoCard from '../components/common/DemoCard';
 import Alert from '../components/common/Alert';
@@ -48,6 +48,13 @@ const Dashboard = () => {
       title: 'Cross-Site Request Forgery (CSRF)',
       description: 'Explore how attackers trick users into performing unwanted actions.',
       color: 'orange',
+    },
+    {
+      path: '/broken-auth',
+      icon: FiUser,
+      title: 'Broken Authentication',
+      description: 'See common auth flaws like enumeration, weak password changes, and missing lockouts.',
+      color: 'purple',
     },
   ];
   
