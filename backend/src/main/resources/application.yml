@@ -3,19 +3,19 @@ spring:
     name: securescape-backend
 
   datasource:
-    url: jdbc:postgresql://ep-long-lab-ahr27ih6-pooler.c-3.us-east-1.aws.neon.tech:5432/neondb?sslmode=require
-    username: neondb_owner
-    password: "npg_ux6qoAWt2rsH"
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   hikari:
-      maximum-pool-size: 5
-      minimum-idle: 0
-      idle-timeout: 10000        # 10 seconds
-      max-lifetime: 30000        # 🔥 30 seconds (CRITICAL)
-      keepalive-time: 15000      # 🔥 keep connection fresh
-      connection-timeout: 30000
-      validation-timeout: 5000
+    maximum-pool-size: 5
+    minimum-idle: 0
+    idle-timeout: 10000
+    max-lifetime: 30000
+    keepalive-time: 15000
+    connection-timeout: 30000
+    validation-timeout: 5000
 
   jpa:
     hibernate:
@@ -28,7 +28,7 @@ spring:
           time_zone: UTC
 
 server:
-  port: 5000
+  port: ${PORT:5000}
 
 logging:
   level:
