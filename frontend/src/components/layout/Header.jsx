@@ -21,8 +21,8 @@ const Header = () => {
           className="flex items-center gap-2 text-xl font-bold text-gray-900 hover:text-blue-600 transition-colors focus-ring rounded"
           aria-label="SecureScape Home"
         >
-          <span className="text-2xl">🛡️</span>
-          <span>SecureScape</span>
+          {/* <span className="text-2xl">🛡️</span> */}
+          <span>Echelon</span>
         </Link>
         
         <div className="flex items-center gap-4">
