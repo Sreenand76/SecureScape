@@ -75,3 +75,27 @@ Echelon/
 │   └── package.json
 │
 └── README.md
+```
+
+## 📂 Project Setup
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/Sreenand76/Echelon.git
+```
+
+### 2. Setup the Frontend
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+### 3. Setup the Backend
+```bash
+cd backend
+mvn clean install
+mvn spring-boot:run
+```
+
+---
